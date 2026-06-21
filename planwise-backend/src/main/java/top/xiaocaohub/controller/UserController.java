@@ -87,6 +87,12 @@ public class UserController {
         try {
             // 解析 Token
             String token = authorization.replace("Bearer ", "");
+
+            // 验证 Token 是否有效
+            if (!jwtUtil.validateToken(token)) {
+                return Result.error(401, "Token无效或已过期");
+            }
+
             Integer userId = jwtUtil.getUserIdFromToken(token);
 
             // 查询用户信息
@@ -120,6 +126,12 @@ public class UserController {
             @RequestBody Map<String, String> params) {
         try {
             String token = authorization.replace("Bearer ", "");
+
+            // 验证 Token 是否有效
+            if (!jwtUtil.validateToken(token)) {
+                return Result.error(401, "Token无效或已过期");
+            }
+
             Integer userId = jwtUtil.getUserIdFromToken(token);
 
             String email = params.get("email");
@@ -143,6 +155,12 @@ public class UserController {
             @RequestBody Map<String, String> params) {
         try {
             String token = authorization.replace("Bearer ", "");
+
+            // 验证 Token 是否有效
+            if (!jwtUtil.validateToken(token)) {
+                return Result.error(401, "Token无效或已过期");
+            }
+
             Integer userId = jwtUtil.getUserIdFromToken(token);
 
             String oldPassword = params.get("oldPassword");
@@ -162,6 +180,12 @@ public class UserController {
             @RequestParam("file") MultipartFile file) {
         try {
             String token = authorization.replace("Bearer ", "");
+
+            // 验证 Token 是否有效
+            if (!jwtUtil.validateToken(token)) {
+                return Result.error(401, "Token无效或已过期");
+            }
+
             Integer userId = jwtUtil.getUserIdFromToken(token);
 
             // 1. 验证文件类型
