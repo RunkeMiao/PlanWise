@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+// 根组件
 </script>
 
 <template>
-  <HelloWorld />
+  <router-view />
 </template>
