@@ -208,7 +208,10 @@ public class UserController {
             String uploadPath = System.getProperty("user.dir") + "/uploads/avatars/";
             java.io.File dir = new java.io.File(uploadPath);
             if (!dir.exists()) {
-                dir.mkdirs();
+                boolean created = dir.mkdirs();
+                if (!created) {
+                    return Result.error("创建上传目录失败");
+                }
             }
             file.transferTo(new java.io.File(uploadPath + newFilename));
 
