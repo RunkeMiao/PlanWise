@@ -7,7 +7,7 @@ public interface UserService {
     /**
      * 用户注册
      */
-    User register(String username, String password, String email, String phone);
+    User register(String username, String password, String realName, String email, String phone);
 
     /**
      * 用户登录
@@ -22,7 +22,7 @@ public interface UserService {
     /**
      * 修改个人信息
      */
-    void updateUserInfo(Integer id, String email, String phone);
+    void updateUserInfo(Integer id, String realName, String email, String phone);
 
     /**
      * 修改密码

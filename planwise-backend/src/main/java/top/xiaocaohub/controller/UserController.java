@@ -29,11 +29,12 @@ public class UserController {
     public Result<?> register(@RequestBody Map<String, String> params) {
         String username = params.get("username");
         String password = params.get("password");
+        String realName = params.get("realName");
         String email = params.get("email");
         String phone = params.get("phone");
 
         try {
-            User user = userService.register(username, password, email, phone);
+            User user = userService.register(username, password, realName, email, phone);
 
             Map<String, Object> data = new HashMap<>();
             data.put("id", user.getId());
@@ -64,6 +65,7 @@ public class UserController {
             Map<String, Object> userData = new HashMap<>();
             userData.put("id", user.getId());
             userData.put("username", user.getUsername());
+            userData.put("realName", user.getRealName());
             userData.put("email", user.getEmail());
             userData.put("phone", user.getPhone());
             userData.put("avatar", user.getAvatar());
@@ -105,10 +107,13 @@ public class UserController {
             Map<String, Object> data = new HashMap<>();
             data.put("id", user.getId());
             data.put("username", user.getUsername());
+            data.put("realName", user.getRealName());
             data.put("email", user.getEmail());
             data.put("phone", user.getPhone());
             data.put("avatar", user.getAvatar());
-            data.put("createTime", user.getCreateTime());
+            data.put("createTime", user.getCreateTime() != null
+                    ? user.getCreateTime().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                    : null);
 
             return Result.success(data);
         } catch (Exception e) {
@@ -134,10 +139,11 @@ public class UserController {
 
             Integer userId = jwtUtil.getUserIdFromToken(token);
 
+            String realName = params.get("realName");
             String email = params.get("email");
             String phone = params.get("phone");
 
-            userService.updateUserInfo(userId, email, phone);
+            userService.updateUserInfo(userId, realName, email, phone);
 
             return Result.success("修改成功", null);
         } catch (Exception e) {

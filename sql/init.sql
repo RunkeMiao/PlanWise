@@ -18,6 +18,7 @@ CREATE TABLE `user` (
     `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
     `username` VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',
     `password` VARCHAR(100) NOT NULL COMMENT '密码(MD5加密)',
+    `real_name` VARCHAR(50) DEFAULT NULL COMMENT '真实姓名',
     `email` VARCHAR(100) DEFAULT NULL COMMENT '邮箱',
     `phone` VARCHAR(20) DEFAULT NULL COMMENT '手机号',
     `avatar` VARCHAR(255) DEFAULT '/images/avatar/default.png' COMMENT '头像路径',
@@ -228,12 +229,12 @@ INSERT INTO `skill` (`name`, `category`) VALUES
 -- =============================================
 -- 初始数据：测试用户（密码都是 123456 的MD5值）
 -- =============================================
-INSERT INTO `user` (`username`, `password`, `email`, `phone`, `avatar`) VALUES
-('zhangsan', 'e10adc3949ba59abbe56e057f20f883e', 'zhangsan@example.com', '13800138001', '/images/avatar/default.png'),
-('lisi', 'e10adc3949ba59abbe56e057f20f883e', 'lisi@example.com', '13800138002', '/images/avatar/default.png'),
-('wangwu', 'e10adc3949ba59abbe56e057f20f883e', 'wangwu@example.com', '13800138003', '/images/avatar/default.png'),
-('zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', 'zhaoliu@example.com', '13800138004', '/images/avatar/default.png'),
-('test', 'e10adc3949ba59abbe56e057f20f883e', 'test@example.com', '13800138000', '/images/avatar/default.png');
+INSERT INTO `user` (`username`, `password`, `real_name`, `email`, `phone`, `avatar`) VALUES
+('zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '张三', 'zhangsan@example.com', '13800138001', '/images/avatar/default.png'),
+('lisi', 'e10adc3949ba59abbe56e057f20f883e', '李四', 'lisi@example.com', '13800138002', '/images/avatar/default.png'),
+('wangwu', 'e10adc3949ba59abbe56e057f20f883e', '王五', 'wangwu@example.com', '13800138003', '/images/avatar/default.png'),
+('zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '赵六', 'zhaoliu@example.com', '13800138004', '/images/avatar/default.png'),
+('test', 'e10adc3949ba59abbe56e057f20f883e', '测试用户', 'test@example.com', '13800138000', '/images/avatar/default.png');
 
 -- =============================================
 -- 初始数据：测试项目

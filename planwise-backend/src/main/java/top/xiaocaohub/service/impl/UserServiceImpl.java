@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User register(String username, String password, String email, String phone) {
+    public User register(String username, String password, String realName, String email, String phone) {
         // 1. 检查用户名是否已存在
         // LambdaQueryWrapper : MyBatis-Plus 的条件构造器
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(Md5Util.encrypt(password));  // MD5加密
+        user.setRealName(realName);
         user.setEmail(email);
         user.setPhone(phone);
 
@@ -65,9 +66,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserInfo(Integer id, String email, String phone) {
+    public void updateUserInfo(Integer id, String realName, String email, String phone) {
         User user = new User();
         user.setId(id);
+        user.setRealName(realName);
         user.setEmail(email);
         user.setPhone(phone);
         userMapper.updateById(user);
